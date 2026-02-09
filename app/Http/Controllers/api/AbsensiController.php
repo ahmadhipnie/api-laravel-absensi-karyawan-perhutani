@@ -80,9 +80,9 @@ class AbsensiController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'tanggal' => 'required|date',
-            'clock_in_image' => 'nullable|image|max:2048',
-            'clock_in_lat' => 'nullable|string',
-            'clock_in_long' => 'nullable|string',
+            'clock_in_image' => 'required|image|max:2048',
+            'clock_in_lat' => 'required|string',
+            'clock_in_long' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -170,9 +170,9 @@ class AbsensiController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'clock_out_image' => 'nullable|image|max:2048',
-            'clock_out_lat' => 'nullable|string',
-            'clock_out_long' => 'nullable|string',
+            'clock_out_image' => 'required|image|max:2048',
+            'clock_out_lat' => 'required|string',
+            'clock_out_long' => 'required|string',
         ]);
 
         if ($validator->fails()) {
