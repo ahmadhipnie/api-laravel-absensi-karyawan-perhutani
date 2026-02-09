@@ -1,0 +1,505 @@
+{
+	"info": {
+		"name": "API Absensi Laravel",
+		"description": "Collection for Absensi API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"npk\": \"EMP001\",\n    \"nama\": \"John Doe\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"role\": \"karyawan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": ["{{base_url}}"],
+							"path": ["register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"npk\": \"EMP001\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": ["{{base_url}}"],
+							"path": ["login"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logout",
+							"host": ["{{base_url}}"],
+							"path": ["logout"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users?per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["users"],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "role",
+									"value": "karyawan",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "John",
+									"disabled": true
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"npk\": \"EMP002\",\n    \"nama\": \"Jane Smith\",\n    \"password\": \"password123\",\n    \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nama\": \"Jane Smith Updated\",\n    \"role\": \"karyawan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/2",
+							"host": ["{{base_url}}"],
+							"path": ["users", "2"]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/2",
+							"host": ["{{base_url}}"],
+							"path": ["users", "2"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Absensi",
+			"item": [
+				{
+					"name": "Clock In",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tanggal",
+									"value": "2026-02-06",
+									"type": "text"
+								},
+								{
+									"key": "clock_in_lat",
+									"value": "-6.200000",
+									"type": "text"
+								},
+								{
+									"key": "clock_in_long",
+									"value": "106.816666",
+									"type": "text"
+								},
+								{
+									"key": "clock_in_image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/absensi/clock-in",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "clock-in"]
+						}
+					}
+				},
+				{
+					"name": "Clock Out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "clock_out_lat",
+									"value": "-6.200000",
+									"type": "text"
+								},
+								{
+									"key": "clock_out_long",
+									"value": "106.816666",
+									"type": "text"
+								},
+								{
+									"key": "clock_out_image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/absensi/clock-out/1",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "clock-out", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get All Absensi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi?per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["absensi"],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "terlambat",
+									"disabled": true
+								},
+								{
+									"key": "month",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2026",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "John",
+									"disabled": true
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Absensi by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi/1",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update Absensi",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"izin\",\n    \"late_duration\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/absensi/1",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Absensi",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi/1",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get User Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi/user/1/stats?month=2&year=2026",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "user", "1", "stats"],
+							"query": [
+								{
+									"key": "month",
+									"value": "2"
+								},
+								{
+									"key": "year",
+									"value": "2026"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Export",
+			"item": [
+				{
+					"name": "Export to Excel",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi/export/excel",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "export", "excel"],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "month",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2026",
+									"disabled": true
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Export to PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/absensi/export/pdf",
+							"host": ["{{base_url}}"],
+							"path": ["absensi", "export", "pdf"],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "month",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2026",
+									"disabled": true
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
